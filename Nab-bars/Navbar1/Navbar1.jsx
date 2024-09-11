@@ -3,9 +3,13 @@
  * @see https://v0.dev/t/u67M38KH5L7
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import Link from "next/link"
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
+
+//!copy from here...........
+
+
+import Link from "next/link";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 export default function Component() {
   return (
@@ -15,19 +19,39 @@ export default function Component() {
         <span className="sr-only">Acme Inc</span>
       </Link>
       <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-        <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+        <Link
+          href="#"
+          className="text-muted-foreground hover:text-foreground"
+          prefetch={false}
+        >
           Home
         </Link>
-        <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+        <Link
+          href="#"
+          className="text-muted-foreground hover:text-foreground"
+          prefetch={false}
+        >
           Features
         </Link>
-        <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+        <Link
+          href="#"
+          className="text-muted-foreground hover:text-foreground"
+          prefetch={false}
+        >
           Pricing
         </Link>
-        <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+        <Link
+          href="#"
+          className="text-muted-foreground hover:text-foreground"
+          prefetch={false}
+        >
           About
         </Link>
-        <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+        <Link
+          href="#"
+          className="text-muted-foreground hover:text-foreground"
+          prefetch={false}
+        >
           Contact
         </Link>
       </nav>
@@ -40,26 +64,46 @@ export default function Component() {
         </SheetTrigger>
         <SheetContent side="right" className="w-[300px] bg-background p-6">
           <div className="flex flex-col gap-4">
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+            <Link
+              href="#"
+              className="text-muted-foreground hover:text-foreground"
+              prefetch={false}
+            >
               Home
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+            <Link
+              href="#"
+              className="text-muted-foreground hover:text-foreground"
+              prefetch={false}
+            >
               Features
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+            <Link
+              href="#"
+              className="text-muted-foreground hover:text-foreground"
+              prefetch={false}
+            >
               Pricing
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+            <Link
+              href="#"
+              className="text-muted-foreground hover:text-foreground"
+              prefetch={false}
+            >
               About
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
+            <Link
+              href="#"
+              className="text-muted-foreground hover:text-foreground"
+              prefetch={false}
+            >
               Contact
             </Link>
           </div>
         </SheetContent>
       </Sheet>
     </header>
-  )
+  );
 }
 
 function MenuIcon(props) {
@@ -80,9 +124,8 @@ function MenuIcon(props) {
       <line x1="4" x2="20" y1="6" y2="6" />
       <line x1="4" x2="20" y1="18" y2="18" />
     </svg>
-  )
+  );
 }
-
 
 function MountainIcon(props) {
   return (
@@ -100,5 +143,5 @@ function MountainIcon(props) {
     >
       <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
     </svg>
-  )
+  );
 }
