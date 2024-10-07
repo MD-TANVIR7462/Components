@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberLink Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes neon-pulse {
+            0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff, 0 0 75px #00ffff; }
+            50% { text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #fff, 0 0 10px #00ffff, 0 0 17px #00ffff, 0 0 20px #00ffff, 0 0 25px #00ffff, 0 0 37px #00ffff; }
+        }
+
+        .neon-text {
+            animation: neon-pulse 1.5s infinite alternate;
+        }
+
+        .bg-animated {
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #000033, #003366);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cyber-grid {
+            background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: cyber-grid-move 20s linear infinite;
+        }
+
+        @keyframes cyber-grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00ffff;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            transform: translateX(0);
+        }
+
+        .nav-link::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            background: linear-gradient(to bottom, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: translateY(0);
+        }
+
+        .glitch-effect {
+            position: relative;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-effect::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00de;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-effect::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(39px, 9999px, 71px, 0); }
+            20% { clip: rect(3px, 9999px, 5px, 0); }
+            40% { clip: rect(6px, 9999px, 38px, 0); }
+            60% { clip: rect(13px, 9999px, 43px, 0); }
+            80% { clip: rect(44px, 9999px, 93px, 0); }
+            100% { clip: rect(54px, 9999px, 47px, 0); }
+        }
+
+        #menu-toggle:checked ~ .menu-icon .hamburger {
+            transform: rotate(45deg);
+        }
+
+        #menu-toggle:checked ~ .menu-icon .hamburger::before {
+            transform: translateY(8px) rotate(90deg);
+        }
+
+        #menu-toggle:checked ~ .menu-icon .hamburger::after {
+            transform: translateY(-8px) rotate(90deg);
+        }
+
+        .hamburger,
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            display: block;
+            background: #00ffff;
+            height: 3px;
+            width: 30px;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hamburger::before { transform: translateY(-8px); }
+        .hamburger::after { transform: translateY(8px); }
+
+        @media (max-width: 768px) {
+            .menu {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgba(0, 0, 0, 0.9);
+                overflow: hidden;
+                transition: height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            #menu-toggle:checked ~ .menu {
+                height: calc(100vh - 60px);
+            }
+        }
+
+        .feature-card {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .testimonial-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff;
+            animation: neon-border-pulse 1.5s infinite alternate;
+        }
+
+        @keyframes neon-border-pulse {
+            0%, 100% { box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff; }
+            50% { box-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #fff, 0 0 10px #00ffff, 0 0 17px #00ffff, 0 0 20px #00ffff; }
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Navbar -->
+    <nav class="bg-animated cyber-grid fixed w-full z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-2xl font-bold neon-text glitch-effect" data-text="CYBERLINK">CYBERLINK</a>
+                <input type="checkbox" id="menu-toggle" class="hidden">
+                <label for="menu-toggle" class="menu-icon cursor-pointer md:hidden">
+                    <span class="hamburger"></span>
+                </label>
+                <ul class="menu hidden md:flex md:items-center space-x-6">
+                    <li><a href="#" class="nav-link" data-text="Home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-text="Features">Features</a></li>
+                    <li><a href="#" class="nav-link" data-text="Testimonials">Testimonials</a></li>
+                    <li><a href="#" class="nav-link" data-text="Contact">Contact</a></li>
+                    <li><a href="#" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-2 px-4 rounded hover:from-cyan-600 hover:to-blue-600 transition-all duration-300">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-animated cyber-grid min-h-screen flex items-center justify-center p-4">
+        <div id="particles"></div>
+        <div class="text-center z-10">
+            <h1 class="text-6xl font-bold mb-4 text-white neon-text glitch-effect hover-3d" data-text="CYBERLINK ACADEMY">CYBERLINK ACADEMY</h1>
+            <p class="text-xl text-cyan-300 mb-8">Unlock the future of learning in the digital realm</p>
+            <a href="#" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-3 px-8 rounded-full hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 hover:scale-110 inline-block">
+                <i class="fas fa-rocket mr-2"></i>Enroll Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Feature Section -->
+    <section class="bg-animated cyber-grid py-20 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 neon-text glitch-effect" data-text="QUANTUM FEATURES">QUANTUM FEATURES</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card rounded-lg p-6 floating">
+                    <div class="text-5xl mb-4 text-cyan-400 feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Neuro-Link Learning</h3>
+                    <p class="text-gray-300">Interface directly with our AI-powered learning system for rapid skill acquisition.</p>
+                </div>
+                <div class="feature-card rounded-lg p-6 floating" style="animation-delay: 1s;">
+                    <div class="text-5xl mb-4 text-pink-500 feature-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Virtual Reality Campus</h3>
+                    <p class="text-gray-300">Attend classes in fully immersive 3D environments from anywhere in the world.</p>
+                </div>
+                <div class="feature-card rounded-lg p-6 floating" style="animation-delay: 2s;">
+                    <div class="text-5xl mb-4 text-purple-500 feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">AI Tutors</h3>
+                    <p class="text-gray-300">Personalized learning assistance from advanced AI tutors available 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+ <!-- Testimonials Section -->
+    <section class="bg-animated cyber-grid py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 neon-text glitch-effect" data-text="TESTIMONIALS">TESTIMONIALS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/60?img=1" alt="Student 1" class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Alex Quantum</h4>
+                            <p class="text-cyan-400">Nano-Engineering Student</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"CyberLink Academy's Neuro-Link Learning system helped me master quantum algorithms in just weeks. It's revolutionary!"</p>
+                </div>
+                <div class="testimonial-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/60?img=2" alt="Student 2" class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Zoe Nexus</h4>
+                            <p class="text-cyan-400">AI Ethics Researcher</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"The Virtual Reality Campus made collaboration with peers from around the globe seamless and engaging. It's the future of education!"</p>
+                </div>
+                <div class="testimonial-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/60?img=3" alt="Student 3" class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Ryu Cipher</h4>
+                            <p class="text-cyan-400">Cybersecurity Specialist</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"The AI Tutors at CyberLink Academy provided personalized guidance that accelerated my learning beyond what I thought possible."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-animated cyber-grid relative overflow-hidden">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-white neon-text mb-4">CYBERLINK ACADEMY</h3>
+                    <p class="text-cyan-300">Empowering minds in the digital age</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-xl font-bold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300">Home</a></li>
+                        <li><a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300">Courses</a></li>
+                        <li><a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300">About Us</a></li>
+                        <li><a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <h4 class="text-xl font-bold text-white mb-4">Stay Connected</h4>
+                    <div class="flex justify-center md:justify-end space-x-4">
+                        <a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300"><i class="fab fa-facebook-f text-2xl"></i></a>
+                        <a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="#" class="text-cyan-300 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin-in text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-cyan-800">
+                <p class="text-center text-cyan-300">&copy; 2024 CyberLink Academy. All rights reserved.</p>
+            </div>
+        </div>
+        <div class="absolute inset-0 pointer-events-none neon-border"></div>
+    </footer>
+
+    <script>
+        // Navbar toggle functionality
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('change', function() {
+            if (this.checked) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                menu.classList.remove('hidden', 'flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+                menu.classList.add('md:flex', 'md:items-center');
+                menuToggle.checked = false;
+            } else if (!menuToggle.checked) {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+            }
+        });
+
+        // Particle effect for hero section
+        function createParticle() {
+            const particles = document.getElementById('particles');
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 5 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            const x = Math.random() * window.innerWidth;
+            const y = window.innerHeight;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            const hue = Math.random() * 360;
+            particle.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+            
+            const duration = Math.random() * 3 + 2;
+            particle.style.animation = `float-up ${duration}s linear`;
+            
+            particles.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createParticle, 50);
+    </script>
+</body>
+</html>
