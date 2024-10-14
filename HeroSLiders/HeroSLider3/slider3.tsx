@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { FaArrowLeft, FaArrowRight, FaShoppingCart } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { FaArrowLeft, FaArrowRight, FaShoppingCart } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const categories = [
   {
-    title: 'Fashion & Accessories',
-    description: 'Discover the latest trends in fashion and stylish accessories.',
-    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+    title: "Fashion & Accessories",
+    description:
+      "Discover the latest trends in fashion and stylish accessories.",
+    image:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    title: 'Electronics & Gadgets',
-    description: 'Explore cutting-edge technology and innovative gadgets.',
-    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+    title: "Electronics & Gadgets",
+    description: "Explore cutting-edge technology and innovative gadgets.",
+    image:
+      "https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    title: 'Home & Living',
-    description: 'Transform your space with our curated home decor collection.',
-    image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80'
-  }
+    title: "Home & Living",
+    description: "Transform your space with our curated home decor collection.",
+    image:
+      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+  },
 ];
 
 const HeroSection = () => {
@@ -32,7 +36,9 @@ const HeroSection = () => {
   }, []);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + categories.length) % categories.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + categories.length) % categories.length
+    );
   };
 
   const handleNext = () => {
@@ -48,7 +54,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <AnimatePresence mode='wait'>
+          <AnimatePresence mode="wait">
             <motion.h1
               key={currentIndex}
               className="text-4xl md:text-5xl font-bold mb-4"
@@ -60,7 +66,7 @@ const HeroSection = () => {
               {categories[currentIndex].title}
             </motion.h1>
           </AnimatePresence>
-          <AnimatePresence mode='wait'>
+          <AnimatePresence mode="wait">
             <motion.p
               key={currentIndex}
               className="text-xl mb-8"
@@ -87,7 +93,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <AnimatePresence mode='wait'>
+          <AnimatePresence mode="wait">
             <motion.img
               key={currentIndex}
               src={categories[currentIndex].image}
