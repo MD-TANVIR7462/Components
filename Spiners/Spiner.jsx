@@ -1,5 +1,5 @@
 import React from 'react';
-
+//all spiners 
 const Spiner = () => {
     return (
         <div>
